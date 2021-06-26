@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/39f2a6897b.js" crossorigin="anonymous"></script>  
+    <title>Snowday Predictor</title>
+</head>
+<body>
+    <nav>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#results">Prediction</a>
+            <a href="#locations">Locations</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+    <main>
+        <div class = "main">
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+            <h1>Snow Day Predictor</h1>
+            <p>Select your location to continue (skip if a location is already saved)</p>
+            <input id = 'search' type="text">
+            <button onclick ="getLocations(document.getElementById('search').value)">Search for this location</button>
+            <p>Results</p>
+            <ol id = "results">
+                Click on a result below
+            </ol>
+            <div class="loader"></div>
+            
+            <h3>Load Data</h3>
+            <button onclick='getPrediction()'>Load snow day prediction</button>
+        </div>
+        <div class = "main" style="background-color: rgb(109, 0, 182);">
+            <h1>Location Status</h1>
+            <div id="locations">
+                <p>No locations saved. Please choose a location above</p>
+            </div>
+            <button onclick='self.clear()'>Clear all locations</button>
+            <p>You can then search for another location</p>
+        </div>
+        <div class="main" style="background-color: rgb(71, 104, 255);">
+            <h1>Predicted Snowfall</h1>
+            <div id="snowfall">
+                Select a location to continue <i class="far fa-snowflake"></i>
+            </div>
+        </div>
+        <div class="main" id = "about" style="background-color: black">
+            <h1>About</h1>
+            <p>This project was made to predict the chance of a school closure aka snow day</p>
+            <p>It is not infallible and should not be used in the place of an official announcment</p>
+        </div>
+        <div class="main" id = "contact">
+            <h1>Contact</h1>
+            <p>Contact at snowdaypredictor@gmail.com</p>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
