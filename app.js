@@ -5,12 +5,15 @@ var els = [];
 var glinks;
 var loader = true;
 var saved;
-serverURL = "http://192.168.0.17"
+serverURL = "http://nuggetapi.ddns.net"
 function recieve(value, target){
   document.getElementById(target).innerHTML = value;
 }
 function save(name){
     //mimicing saving
+    recieve("Location Saved: click load snow day prediction", "results")
+    recieve("Location has been saved", 'locations')
+    recieve("Click load snow day prediction above", 'snowfall')
     saved = name;
     console.log("saved location")
 }
@@ -42,11 +45,12 @@ function recieveSearch(values, links){
 }
 function getLocations(search){
     var xmlhttp = new XMLHttpRequest();
-
+    setLoader()
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var parsed = JSON.parse(this.responseText);
         recieveSearch(parsed.resultText, parsed.resultLinks)
+        setLoader()
         }
     };
     xmlhttp.open("GET", `${serverURL}/search/${search}`, true);
@@ -54,11 +58,12 @@ function getLocations(search){
 }
 function getPrediction(){
     var xmlhttp = new XMLHttpRequest();
-
+    setLoader()
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var parsed = JSON.parse(this.responseText);
             recievePrediction(parsed.today, parsed.tomorrow)
+            setLoader()
         }
     };
     xmlhttp.open("GET", `${serverURL}/getprediction/${saved}`, true);
@@ -88,4 +93,31 @@ function setLoader(){
     loader = true;
   }
   
+}
+function writeFile() {
+  var type = window.TEMPORARY;
+  var size = 5*1024*1024;
+  window.requestFileSystem(type, size, successCallback, errorCallback)
+
+  function successCallback(fs) {
+     fs.root.getFile('log.txt', {create: true}, function(fileEntry) {
+
+        fileEntry.createWriter(function(fileWriter) {
+           fileWriter.onwriteend = function(e) {
+              alert('Write completed.');
+           };
+
+           fileWriter.onerror = function(e) {
+              alert('Write failed: ' + e.toString());
+           };
+
+           var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
+           fileWriter.write(blob);
+        }, errorCallback);
+     }, errorCallback);
+  }
+
+  function errorCallback(error) {
+     alert("ERROR: " + error.code)
+  }
 }
