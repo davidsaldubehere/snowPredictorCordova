@@ -160,6 +160,7 @@ function readFile() {
         console.log("ERROR: " + error.code)
     }
 }	
+//removes file from the system
 function removeFile() {
     var type = window.TEMPORARY;
     var size = 5*1024*1024;

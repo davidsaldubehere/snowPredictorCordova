@@ -16,7 +16,7 @@
         <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
+        <title>Snow Day Predictor</title>
     </head>
     <body>
         <nav>
@@ -32,7 +32,7 @@
             <div class = "main">
                 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
                 <h1>Snow Day Predictor</h1>
-                <p>Select your location to continue (skip if a location is already saved)</p>
+                <p>Select your location to continue (skip if a location is already<a style="border: none; text-decoration:none; color: rgb(137, 137, 255);"href ="#locations">saved</a>)</p>
                 <input id = 'search' type="text">
                 <button onclick ="getLocations(document.getElementById('search').value)">Search for this location</button>
                 <p>Results</p>
